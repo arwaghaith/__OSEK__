@@ -351,16 +351,16 @@ For example, it’s like taking the bowl from Jones and give it to Jack when he 
 
 <br>
 <br>
-                |                   | preemptive | nonpreemptive |
-                |-------------------|------------|---------------|
-                | activate task     |     x      |               |
-                | terminate task    |     x      |      x        |
-                | wait event        |     x      |      x        |
-                | chaining task     |     x      |      x        |
-                | Get Resource      |            |               |
-                | Release Resource  |     x      |               |
-                | scheduler         |     x      |      x        |
-                | ISR               |     x      |               |
+                | Operation          | Preemptive | Nonpreemptive |
+                |--------------------|------------|---------------|
+                | Activate Task      |     x      |               |
+                | Terminate Task     |     x      |      x        |
+                | Wait Event         |     x      |      x        |
+                | Chaining Task      |     x      |      x        |
+                | Get Resource       |            |               |
+                | Release Resource   |     x      |               |
+                | Scheduler          |     x      |      x        |
+                | ISR                |     x      |               |
 
 <br>
 <br>
@@ -532,7 +532,9 @@ There are two general approaches to waiting in operating systems:
   | Progress         | ✔         |
   | Bounded Limit    | ✔         |
   <br><br>
-**What Is Busy Waiting?**
+
+
+What Is Busy Waiting?
 
 Busy waiting, also known as spinning or busy looping, is a process synchronization technique in which a process/task waits and constantly checks for a condition to be satisfied before proceeding with its execution. In busy waiting, a process executes instructions that test for the entry condition to be true, such as the availability of a lock or resource in the computer system.
 
