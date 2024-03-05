@@ -350,7 +350,7 @@ For example, it’s like taking the bowl from Jones and give it to Jack when he 
 ## When is the scheduler triggered?
 
 <br>
-<br>
+
 | Operation         | Preemptive | Nonpreemptive |
 |-------------------|------------|---------------|
 | Activate Task     |     x      |               |
@@ -363,7 +363,7 @@ For example, it’s like taking the bowl from Jones and give it to Jack when he 
 | ISR               |     x      |               |
 
 
-<br>
+
 <br>
 
 3-
