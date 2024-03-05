@@ -1,6 +1,6 @@
 ## OSEK
 
-- OSEK stands for "Operating System Embedded Kernel.<br>"
+- OSEK stands for "Operating System Embedded Kernel.<br>
 
 - It is a widely used standard for real-time operating systems (RTOS) in embedded systems.
 
