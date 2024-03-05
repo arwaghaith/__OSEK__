@@ -351,16 +351,17 @@ For example, it’s like taking the bowl from Jones and give it to Jack when he 
 
 <br>
 <br>
-                | Operation          | Preemptive | Nonpreemptive |
-                |--------------------|------------|---------------|
-                | Activate Task      |     x      |               |
-                | Terminate Task     |     x      |      x        |
-                | Wait Event         |     x      |      x        |
-                | Chaining Task      |     x      |      x        |
-                | Get Resource       |            |               |
-                | Release Resource   |     x      |               |
-                | Scheduler          |     x      |      x        |
-                | ISR                |     x      |               |
+| Operation         | Preemptive | Nonpreemptive |
+|-------------------|------------|---------------|
+| Activate Task     |     x      |               |
+| Terminate Task    |     x      |      x        |
+| Wait Event        |     x      |      x        |
+| Chaining Task     |     x      |      x        |
+| Get Resource      |            |               |
+| Release Resource  |     x      |               |
+| Scheduler         |     x      |      x        |
+| ISR               |     x      |               |
+
 
 <br>
 <br>
