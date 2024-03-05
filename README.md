@@ -576,6 +576,7 @@ lock variable
     When Lock = 0 implies the critical section is vacant (initial value) and Lock = 1 implies the critical section is occupied. The pseudocode looks something like this:
 
 <br><br>
+
     | Task 0             | Task 1             |
     | ------------------ | ------------------ |
     | //Entry section -  | //Entry section -  |
@@ -584,7 +585,8 @@ lock variable
     | //critical section | //critical section |
     | Exit section -     | Exit section -     |
     | Lock = 0;          | lock=0;            |
- <br><br>
+    
+<br><br>
 
     - This method is hardware independent.
     <br><br>
@@ -594,6 +596,7 @@ lock variable
     | Mutual Exclusion | X         |
     | Progress         | ✔         |
     | Bounded Limit    | X         |
+    
     <br><br>
 
 - In some operating systems, busy waiting can be inefficient because the looping procedure is a waste of computer resources. In addition, the system is left idle while waiting. This is particularly wasteful if the task/process at hand is of low priority. In that case, resources that can be diverted to complete high-priority tasks are hogged by a low-priority task in busy waiting.
