@@ -158,7 +158,7 @@ which ready task is executed next.
 • waiting A task cannot continue execution because it has to wait for at least one event
 • suspended In the suspended state the task is passive and can be activated.
 <br><br>
-![alt text](assets/image3.png)
+![alt1t](assets/image3.png)
 <br><br>
 
 Transition Former
@@ -264,7 +264,7 @@ scheduler temporarily via the system service GetResource.
 The real trouble arises at run-time, when a medium-priority task preempts a lower-priority task using a shared resource on which the higher-priority task is pending. If the higher-priority task is otherwise ready to run, but a medium-priority task is currently running instead, a priority inversion is said to occur.
 
 <br><br>
-![alt text](assrts/image4.png)
+![alt2](assrts/image4.png)
 
 <br><br>
 
@@ -302,7 +302,7 @@ While not all of us are writing software for missions to Mars, we should learn f
 
 <br><br>
 
-![alt text](assets/image5.png)
+![alt3](assets/image5.png)
 
 <br><br>
 
@@ -495,7 +495,7 @@ Both absolute time and relative time have their use cases:
 
 - The portion of a piece of code that is performed by many threads is considered in critical section of a code. The critical section area is vulnerable to a race condition because various outputs from concurrently running threads potentially result in different orders of execution.
 
-![alt text](assets/image6.png)
+![alt4](assets/image6.png)
 
 # Any solution to the critical section problem must satisfy three requirements:
 
@@ -536,7 +536,7 @@ Busy waiting, also known as spinning or busy looping, is a process synchronizati
 
 For resource availability, consider a scenario where a process needs a resource for a specific program. However, the resource is currently in use and unavailable at the moment, therefore the process has to wait for resource availability before it can continue. This is what is known as busy waiting as illustrated below:
 
-![alt text](assets/image7.png)
+![alt5](assets/image7.png)
 
 ## Busy Waiting Techniques
 
@@ -577,7 +577,7 @@ For resource availability, consider a scenario where a process needs a resource 
 
 - It uses a test and set instruction to provide synchronization among the processes executing concurrently.
 
-![alt text](assets/image8.png)
+![alt6](assets/image8.png)
 
 This synchronization mechanism works as explained in the following scenes:
 
@@ -637,7 +637,7 @@ It uses a turn variable to provide the synchronization.
 It is implemented as-
 
 <br><br>
-![alt text](assets/i9.png)
+![alt7](assets/i9.png)
 <br><br>
 
 - Scene-01:
