@@ -486,14 +486,13 @@ Both absolute time and relative time have their use cases:
 - **Race Condition in Multi Processing Scenario**
 
   The Race Condition is a situation that is developed when a device or system tries to do two or more operations simultaneously when, due to the nature of the device or system, the actions must be performed in the right order to be performed successfully; a race condition is an unpleasant circumstance that results.
-
 ## Critical Section Area
 
-- The Critical Section Problem is a Code Snippet. This code snippet contains a few variables. These variables can be accessed by a few processes. There is a condition for these processes.
+- <span style="color:red">The Critical Section Problem is a Code Snippet. This code snippet contains a few variables. These variables can be accessed by a few processes. There is a condition for these processes.</span>
 
-- The condition is that only one process can only enter the critical section. Remaining Processes which are interested to enter the critical section have to wait for the process to complete its work and then enter the critical section.
+- <span style="color:red">The condition is that only one process can only enter the critical section. Remaining Processes which are interested to enter the critical section have to wait for the process to complete its work and then enter the critical section.</span>
 
-- The portion of a piece of code that is performed by many threads is considered in critical section of a code. The critical section area is vulnerable to a race condition because various outputs from concurrently running threads potentially result in different orders of execution.
+- <span style="color:red">The portion of a piece of code that is performed by many threads is considered in critical section of a code. The critical section area is vulnerable to a race condition because various outputs from concurrently running threads potentially result in different orders of execution.</span>
 <br><br>
 
 ![alt4](assets/image6.png)
@@ -501,17 +500,19 @@ Both absolute time and relative time have their use cases:
 
 # Any solution to the critical section problem must satisfy three requirements:
 
+ <span style="color:red">
 - **Mutual Exclusion**
-
-  Exclusive access of each process to the shared memory. Only one process can be in its critical section at any given time.
-
+</span>
+   Exclusive access of each process to the shared memory. Only one process can be in its critical section at any given time.
+<span style="color:red">
 - **Progress**
-
-  If no process is in its critical section, and if one or more threads want to execute their critical section then any one of these threads must be allowed to get into its critical section.
-
+</span>
+    If no process is in its critical section, and if one or more threads want to execute their critical section then any one of these threads must be allowed to get into its critical section.
+ <span style="color:red">
 - **Bounded Waiting**
+</span>
 
-  After a process makes a request for getting into its critical section, there is a limit for how many other processes can get into their critical section before this process's request is granted. So after the limit is reached, the system must grant the process permission to get into its critical section. The purpose of this condition is to make sure that every process gets the chance to actually enter its critical section so that no process starves forever.
+   After a process makes a request for getting into its critical section, there is a limit for how many other processes can get into their critical section before this process's request is granted. So after the limit is reached, the system must grant the process permission to get into its critical section. The purpose of this condition is to make sure that every process gets the chance to actually enter its critical section so that no process starves forever.
 
 There are two general approaches to waiting in operating systems:
 
@@ -524,14 +525,14 @@ There are two general approaches to waiting in operating systems:
 "Not Used" as Disabling interrupts introduces additional latency in handling hardware interrupts, as interrupts must remain disabled until critical sections are completed. This latency can impact the responsiveness of the system to external events or interrupts.
 
 
-  <br><br>
+    <br><br>
 
-  | Requirement      | Satisfied |
-  | ---------------- | --------- |
-  | Mutual Exclusion | ✔         |
-  | Progress         | ✔         |
-  | Bounded Limit    | ✔         |
-  <br><br>
+    | Requirement      | Satisfied |
+    | ---------------- | --------- |
+    | Mutual Exclusion | ✔         |
+    | Progress         | ✔         |
+    | Bounded Limit    | ✔         |
+    <br><br>
 
 
 What Is Busy Waiting?
@@ -544,42 +545,53 @@ For resource availability, consider a scenario where a process needs a resource 
 ![alt5](assets/image7.png)
 <br><br>
 
+ <span style="color:red">
+
 ## Busy Waiting Techniques
+</span>
 
-- A lock variable provides the simplest synchronization mechanism for processes. Some noteworthy points regarding Lock Variables are:
 
-  - It's a software mechanism implemented in user mode, i.e., no support required from the Operating System.
-  - It's a busy waiting solution (keeps the CPU busy even when it's technically waiting).
-  - It can be used for more than two processes.
+ <span style="color:blue">
 
-  When Lock = 0 implies the critical section is vacant (initial value) and Lock = 1 implies the critical section is occupied. The pseudocode looks something like this:
+lock variable
+</span>
+  - it provides the simplest synchronization mechanism for processes. Some noteworthy points regarding Lock Variables are:
+
+    - It's a software mechanism implemented in user mode, i.e., no support required from the Operating System.
+    - It's a busy waiting solution (keeps the CPU busy even when it's technically waiting).
+    - It can be used for more than two processes.
+
+    When Lock = 0 implies the critical section is vacant (initial value) and Lock = 1 implies the critical section is occupied. The pseudocode looks something like this:
 
 <br><br>
-  | Task 0             | Task 1             |
-  | ------------------ | ------------------ |
-  | //Entry section -  | //Entry section -  |
-  | while(lock != 0);  | while(lock != 0);  |
-  | Lock = 1;          | lock=1;            |
-  | //critical section | //critical section |
-  | Exit section -     | Exit section -     |
-  | Lock = 0;          | lock=0;            |
+    | Task 0             | Task 1             |
+    | ------------------ | ------------------ |
+    | //Entry section -  | //Entry section -  |
+    | while(lock != 0);  | while(lock != 0);  |
+    | Lock = 1;          | lock=1;            |
+    | //critical section | //critical section |
+    | Exit section -     | Exit section -     |
+    | Lock = 0;          | lock=0;            |
  <br><br>
 
-  - This method is hardware independent.
-  <br><br>
+    - This method is hardware independent.
+    <br><br>
 
-  | Requirement      | Satisfied |
-  | ---------------- | --------- |
-  | Mutual Exclusion | X         |
-  | Progress         | ✔         |
-  | Bounded Limit    | X         |
-  <br><br>
+    | Requirement      | Satisfied |
+    | ---------------- | --------- |
+    | Mutual Exclusion | X         |
+    | Progress         | ✔         |
+    | Bounded Limit    | X         |
+    <br><br>
 
 - In some operating systems, busy waiting can be inefficient because the looping procedure is a waste of computer resources. In addition, the system is left idle while waiting. This is particularly wasteful if the task/process at hand is of low priority. In that case, resources that can be diverted to complete high-priority tasks are hogged by a low-priority task in busy waiting.
 
 - A workaround solution for the inefficiency of busy waiting that is implemented in most operating systems is the use of a delay function. Also known as a sleep system call, a delay function places the process involved in busy waiting into an inactive state for a specified amount of time. In this case, resources are not wasted as the process is "asleep".
 
+ <span style="color:blue">
+
 # T&S "Test and Set"
+</span>
 
 - It uses a test and set instruction to provide synchronization among the processes executing concurrently.
 <br><br>
@@ -591,41 +603,42 @@ This synchronization mechanism works as explained in the following scenes:
 
 - **Scene-01:**
 
-  Process P0 arrives.
-  It executes the test-and-set(Lock) instruction.
-  Since the lock value is set to 0, it returns value 0 to the while loop and sets the lock value to 1.
-  The returned value 0 breaks the while loop condition.
-  Process P0 enters the critical section and executes.
-  Now, even if process P0 gets preempted in the middle, no other process can enter the critical section.
-  Any other process can enter only after process P0 completes and sets the lock value to 0.
+    Process P0 arrives.
+    <br>
+    It executes the test-and-set(Lock) instruction.<br>
+    Since the lock value is set to 0, it returns value 0 to the while loop and sets the lock value to 1.<br>
+    The returned value 0 breaks the while loop condition.<br>
+    Process P0 enters the critical section and executes.<br>
+    Now, even if process P0 gets preempted in the middle, no other process can enter the critical section.<br>
+    Any other process can enter only after process P0 completes and sets the lock value to 0.<br>
 
 - **Scene-02:**
 
-  Another process P1 arrives.
-  It executes the test-and-set(Lock) instruction.
-  Since the lock value is now 1, it returns value 1 to the while loop and sets the lock value to 1.
-  The returned value 1 does not break the while loop condition.
-  The process P1 is trapped inside an infinite while loop.
-  The while loop keeps the process P1 busy until the lock value becomes 0 and its condition breaks.
+    Another process P1 arrives.<br>
+    It executes the test-and-set(Lock) instruction.<br>
+    Since the lock value is now 1, it returns value 1 to the while loop and sets the lock value to 1.<br>
+    The returned value 1 does not break the while loop condition.<br>
+    The process P1 is trapped inside an infinite while loop.<br>
+    The while loop keeps the process P1 busy until the lock value becomes 0 and its condition breaks.<br>
 
 - **Scene-03:**
 
-  Process P0 comes out of the critical section and sets the lock value to 0.
-  The while loop condition breaks.
-  Now, process P1 waiting for the critical section enters the critical section.
-  Now, even if process P1 gets preempted in the middle, no other process can enter the critical section.
-  Any other process can enter only after process P1 completes and sets the lock value to 0.
+    Process P0 comes out of the critical section and sets the lock value to 0.<br>
+    The while loop condition breaks.<br>
+    Now, process P1 waiting for the critical section enters the critical section.<br>
+    Now, even if process P1 gets preempted in the middle, no other process can enter the critical section.<br>
+    Any other process can enter only after process P1 completes and sets the lock value to 0.<br>
 
 # Characteristics
 
 The characteristics of this synchronization mechanism are:
 
-- It ensures mutual exclusion.
-- It is deadlock-free.
-- It does not guarantee bounded waiting and may cause starvation.
-- It suffers from spin lock.
-- It is not architectural neutral "Hardware dependent" since it requires the operating system to support the test-and-set instruction by locking the data bus to support atomic instructions.
-- It is a busy waiting solution that keeps the CPU busy when the process is actually waiting.
+- It ensures mutual exclusion.<br>
+- It is deadlock-free.<br>
+- It does not guarantee bounded waiting and may cause starvation.<br>
+- It suffers from spin lock.<br>
+- It is not architectural neutral "Hardware dependent" since it requires the operating system to support the test-and-set instruction by locking the data bus to support atomic instructions.<br>
+- It is a busy waiting solution that keeps the CPU busy when the process is actually waiting.<br>
 <br><br>
 
 | Requirement      | Satisfied |
@@ -635,8 +648,10 @@ The characteristics of this synchronization mechanism are:
 | Bounded Limit    | X         |
 <br><br>
 
+ <span style="color:blue">
 
 # Strict Alternation
+</span>
 
 - Turn variable is a synchronization mechanism that provides synchronization among two processes.
 It uses a turn variable to provide the synchronization.
@@ -651,35 +666,35 @@ It is implemented as-
 - Scene-01:
  
 
-Process P0 arrives.
-It executes the turn!=0 instruction.
-Since turn value is set to 0, so it returns value 0 to the while loop.
-The while loop condition breaks.
-Process P0 enters the critical section and executes.
-Now, even if process P0 gets preempted in the middle, process P1 can not enter the critical section.
-Process P1 can not enter unless process P0 completes and sets the turn value to 1.
+Process P0 arrives.<br>
+It executes the turn!=0 instruction.<br>
+Since turn value is set to 0, so it returns value 0 to the while loop.<br>
+The while loop condition breaks.<br>
+Process P0 enters the critical section and executes.<br>
+Now, even if process P0 gets preempted in the middle, process P1 can not enter the critical section.<br>
+Process P1 can not enter unless process P0 completes and sets the turn value to 1.<br>
  
 
 - Scene-02:
  
 
 
-Process P1 arrives.
-It executes the turn!=1 instruction.
-Since turn value is set to 0, so it returns value 1 to the while loop.
-The returned value 1 does not break the while loop condition.
-The process P1 is trapped inside an infinite while loop.
-The while loop keeps the process P1 busy until the turn value becomes 1 and its condition breaks.
+Process P1 arrives.<br>
+It executes the turn!=1 instruction.<br>
+Since turn value is set to 0, so it returns value 1 to the while loop.<br>
+The returned value 1 does not break the while loop condition.<br>
+The process P1 is trapped inside an infinite while loop.<br>
+The while loop keeps the process P1 busy until the turn value becomes 1 and its condition breaks.<br>
  
 
 - Scene-03:
  
 
-Process P0 comes out of the critical section and sets the turn value to 1.
-The while loop condition of process P1 breaks.
-Now, the process P1 waiting for the critical section enters the critical section and execute.
-Now, even if process P1 gets preempted in the middle, process P0 can not enter the critical section.
-Process P0 can not enter unless process P1 completes and sets the turn value to 0.
+Process P0 comes out of the critical section and sets the turn value to 1.<br>
+The while loop condition of process P1 breaks.<br>
+Now, the process P1 waiting for the critical section enters the critical section and execute.<br>
+Now, even if process P1 gets preempted in the middle, process P0 can not enter the critical section.<br>
+Process P0 can not enter unless process P1 completes and sets the turn value to 0.<br>
  
 
  
