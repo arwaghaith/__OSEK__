@@ -1,6 +1,6 @@
 ## OSEK
 
-- OSEK stands for "Operating System Embedded Kernel."
+- OSEK stands for "Operating System Embedded Kernel.<br>"
 
 - It is a widely used standard for real-time operating systems (RTOS) in embedded systems.
 
@@ -552,6 +552,17 @@ For resource availability, consider a scenario where a process needs a resource 
 </span>
 
 
+1- LOCK variable<br>
+
+2- T & S  <br>
+
+3- Strict Alternation  <br>
+
+4- Interested Variables  <br>
+
+5- Peterson's Algorithm <br><br>
+
+
  <span style="color:blue">
 
 lock variable
@@ -708,3 +719,433 @@ Process P0 can not enter unless process P1 completes and sets the turn value to 
 | Progress         | X         |
 | Bounded Limit    | ✔         |
 <br><br>
+
+
+
+# Interested Variables
+<br>
+- Interest variable is a synchronization mechanism that provides synchronization among two processes.<br>
+
+- It uses an interest variable to provide the synchronization.
+<br>
+<br>
+
+![alta](assets/i10.png)
+<br>
+<br>
+
+
+# Working-
+ 
+<br>
+
+This synchronization mechanism works as explained in the following scenes-
+
+
+
+<br>
+
+# Scene-01:
+ 
+
+Process P0 arrives.<br>
+
+It sets interest[0] = True.<br>
+
+Now, it executes while loop condition- interest [1] == True.<br>
+
+Since interest [1] is initialized to False, so it returns value 0 to the while loop.<br>
+
+The while loop condition breaks.<br>
+Process P0 enters the critical section and executes.<br>
+Now, even if process P0 gets preempted in the middle, process P1 can not enter the critical section.<br>
+Process P1 can not enter unless process P0 completes and sets the interest [0] = False.<br>
+ 
+<br>
+
+# Scene-02:
+ 
+
+<br>
+
+Process P1 arrives.<br>
+It sets interest[1] = True.<br>
+Now, it executes while loop condition- interest [0] == True.<br>
+Process P0 has already shown its interest by setting interest [0] = True.<br>
+So, it returns value 1 to the while loop.<br>
+The while loop condition satisfies.<br>
+The process P1 is trapped inside an infinite while loop.<br>
+The while loop keeps the process P1 busy until the interest [0] value becomes False and its condition breaks.<br>
+ <br>
+
+
+# Scene-03:
+ 
+
+Process P0 comes out of the critical section and sets the interest [0] value to False.<br>
+The while loop condition of process P1 breaks.<br>
+Now, the process P1 waiting for the critical section enters the critical section and execute.<br>
+Now, even if process P1 gets preempted in the middle, process P0 can not enter the critical section.<br>
+Process P0 can not enter unless process P1 completes and sets the interest [1] = False.<br>
+ 
+
+## Characteristics-
+ 
+
+The characteristics of this synchronization mechanism are-
+
+
+It ensures mutual exclusion.<br>
+It does not follow strict alternation approach.<br>
+It ensures progress since if a process is not interested to enter the critical section, it never stops the other process to enter the critical section.<br>
+It is architectural neutral since it does not require any support from the operating system.<br>
+It is a busy waiting solution which keeps the CPU busy when the process is actually waiting.<br>
+It suffers from deadlock.<br>
+Since it suffers from deadlock, it does not guarantee bounded waiting.<br>
+ 
+
+ # How it suffers from deadlock?
+ 
+
+This synchronization mechanism may cause deadlock between the processes.<br>
+Deadlock may occur through the following sequence of scenes-
+ 
+
+# Scene-01:
+ 
+
+Process P0 arrives.<br>
+It sets interest[0] = True.<br>
+Now, it gets preempted and process P1 gets scheduled.<br>
+ 
+
+# Scene-02:
+ 
+
+Process P1 arrives.<br>
+It sets interest[1] = True.<br>
+Now, it gets preempted.<br>
+ 
+
+# Scene-03:
+ 
+
+Process P0 gets scheduled again.<br>
+Now, it can not break the while loop condition- interest [1] == True since process P1 has shown its interest for executing critical section before its arrival.<br>
+It keeps waiting in the infinite while loop for process P1 to complete its execution first.<br>
+ 
+
+# Scene-04:
+ 
+
+Later, Process P1 gets scheduled again.<br>
+Now, it also can not break the while loop condition- interest [0] == True since process P0 is also interested for executing critical section.<br>
+It keeps waiting in the infinite while loop for process P0 to complete its execution first.<br>
+Thus, both the processes are deadlocked.<br>
+
+<br>
+
+# Peterson's Algorithm
+<br>
+<br>
+- Peterson’s Algorithm is used to synchronize two processes. It uses two variables, a bool array flag of size 2 and an int variable turn to accomplish it.<br>
+
+- In the solution, i represents the Consumer and j represents the Producer. Initially, the flags are false. When a process wants to execute it’s critical section, it sets its flag to true and turn into the index of the other process.<br>
+
+- This means that the process wants to execute but it will allow the other process to run first. The process performs busy waiting until the other process has finished it’s own critical section. <br>
+
+- After this, the current process enters its critical section and adds or removes a random number from the shared buffer.<br>
+ - After completing the critical section, it sets it’s own flag to false, indicating it does not wish to execute anymore. <br>
+
+ Let's consider two processes, P0 and P1, that both want to access a shared resource.
+<br><br>
+```
+bool flag[2] = {false, false};
+int turn = 0; // turn indicates whose turn it is to access the resource
+```
+<br><br>
+
+# Process 0
+```
+//Entry Section
+
+flag[0] = true; // P0 is interested in accessing the critical section
+turn = 1; // It's P1's turn
+while (flag[1] && turn == 1) {
+    // Wait until P1 is not interested or it's P0's turn
+}
+// Critical Section
+
+// Exit Section
+flag[0] = false; // P0 is no longer interested
+```
+<br><br>
+
+# Process 1
+```
+//Entry Section
+
+flag[0] = true; // P1 is interested in accessing the critical section
+turn = 1; // It's P1's turn
+while (flag[1] && turn == 0) {
+    // Wait until P1 is not interested or it's P1's turn
+}
+// Critical Section
+
+// Exit Section
+flag[1] = false; // P1 is no longer interested
+```
+
+
+
+
+
+Peterson's Algorithm is used to synchronize two processes. It uses two variables, a bool array flag of size 2 and an int variable turn to accomplish it.
+
+In the solution, i represents the Consumer and j represents the Producer. Initially, the flags are false. When a process wants to execute its critical section, it sets its flag to true and turn into the index of the other process.
+
+This means that the process wants to execute but it will allow the other process to run first. The process performs busy waiting until the other process has finished its own critical section.
+
+After this, the current process enters its critical section and adds or removes a random number from the shared buffer.
+
+After completing the critical section, it sets its own flag to false, indicating it does not wish to execute anymore.
+
+Let's consider two processes, P0 and P1, that both want to access a shared resource.
+<br>
+<br>
+
+# Scenario for Peterson's Algorithm
+
+  Process P0 arrives.<br>
+  It sets interest[0] = True.<br>
+  Now, it gets preempted and process P1 gets scheduled.<br>
+
+  Process P1 arrives.<br>
+  It sets interest[1] = True.<br>
+  Now, it gets preempted.<br>
+
+  Process P0 gets scheduled again.<br>
+  Now, it can not break the while loop condition - interest[1] == True since process P1 has shown its interest for executing critical section before its arrival.<br>
+  It keeps waiting in the infinite while loop for process P1 to complete its execution first.<br>
+  Later, Process P1 gets scheduled again.<br>
+  Now, it also can not break the while loop condition - interest[0] == True since process P0 is also interested in executing the critical section.<br>
+  It keeps waiting in the infinite while loop for process P0 to complete its execution first.<br>
+  Thus, both the processes are deadlocked.<br>
+
+<br><br>
+
+    | Requirement      | Satisfied |
+    | ---------------- | --------- |
+    | Mutual Exclusion | ✔         |
+    | Progress         | ✔         |
+    | Bounded Limit    | ✔         |
+
+<br><br>
+
+# Characteristics
+<br>
+- Architecture neutral<br>
+
+
+- Supports N processes<br>
+
+
+
+<br>
+
+## NoN-Busy Waiting Techniques
+<br>
+
+- Sleep and Wakeup<br>
+
+- Rather than having a process spin around and around,
+checking if it can proceed into the critical section, suppose
+we implement some mechanism whereby it sends itself to
+sleep and then is awoken only when there is a chance it
+can proceed.<br>
+- Functions such as sleep() and wakeup() are often
+available via a threading library or as kernel service calls.
+Let’s explore this idea
+
+
+Sleep and wakeup (also known as wait and signal) are fundamental operations used in process synchronization to coordinate the execution of multiple processes or threads. These operations are commonly employed in concurrency models to allow processes to wait for certain conditions to be met before proceeding.<br>
+
+# Sleep Operation (Wait):
+
+The sleep operation allows a process to voluntarily suspend its execution and wait for a particular condition to become true.<br>
+When a process invokes the sleep operation, it relinquishes the CPU and enters a blocked state, allowing other processes to execute.<br>
+Typically, the sleep operation is associated with a condition or event that the process is waiting for.<br> The process remains in the blocked state until another process signals that the condition has occurred 
+Wakeup Operation (Signal):
+
+The wakeup operation is used to signal or notify a sleeping process that a particular condition it was waiting for has occurred.<br>
+When a process invokes the wakeup operation, it unblocks the sleeping process, allowing it to resume execution.<br>
+The wakeup operation is often associated with the fulfillment of a condition or the occurrence of an event that was being waited upon by one or more processes.
+
+<br><br>
+
+```
+bool condition = false;
+
+// Function executed by the waiting process
+void waiting_process() {
+    // Loop until the condition is fulfilled
+    while (!condition) {
+        // Sleep operation - block the process until condition becomes true
+        sleep();
+    }
+    // Proceed with execution after the condition is fulfilled
+}
+
+// Function executed by the signaling process
+void signaling_process() {
+    // Perform some work
+    // ...
+
+    // Fulfill the condition
+    condition = true;
+
+    // Wakeup operation - signal the waiting process that the condition is fulfilled
+    wakeup();
+}
+```
+<br><br>
+
+
+1-  SLeep              means  Waiting state
+2-  Wakeup             means  Ready state
+3-  critical section   means  Running State
+
+<br><br>
+typedef struct {
+    int value;             // Value of the semaphore
+    Queue Q:
+} s;
+
+<br><br>
+
+```
+//Entry
+wait();
+//cs
+//Exit
+Signal();
+
+```
+<br><br>
+
+
+wait()
+{
+
+    if(s.value==1)
+    s.value=0;
+
+    else
+    {
+        //put the PCB in the queue
+        sleep();
+    }
+
+signal()
+
+{
+
+    if(s.Q is empty())
+    s.value=1;
+    else
+    {
+
+        //get a [rocess frpm the queue ]
+        wakeup();
+    }
+}
+}
+
+<br>
+<br>
+
+## What is Semaphore?
+<br>
+
+- Semaphore is simply a variable that is non-negative and shared between threads.<br>
+
+- A semaphore is a signaling mechanism, and a thread that is waiting on a semaphore can be signaled by another thread.<br>
+ - It uses two atomic operations, 1)wait, and 2) signal for the process synchronization.<br>
+
+
+A semaphore either allows or disallows access to the resource, which depends on how it is set up.<br>
+
+
+## What is Mutex?
+<br>
+
+- The full form of Mutex is Mutual Exclusion Object. It is a special type of binary semaphore which used for controlling access to the shared resource. <br>
+
+- It includes a priority inheritance mechanism to avoid extended priority inversion problems. <br>
+
+- It allows current higher priority tasks to be kept in the blocked state for the shortest time possible. However, priority inheritance does not correct priority- inversion but only minimizes its effect.<br>
+
+
+## Use of Semaphore
+<br>
+
+- In the case of a single buffer, we can separate the 4 KB buffer into four 1 KB buffers. Semaphore can be associated with these four buffers. This allows users and producers to work on different buffers at the same time.
+
+## Use of Mutex
+<br>
+
+A mutex provides mutual exclusion, which can be either producer or consumer that can have the key (mutex) and proceed with their work. As long as producer fills buffer, the user needs to wait, and vice versa. In Mutex lock, all the time, only a single thread can work with the entire buffer.
+
+<br>
+<br>
+
+![alt12](assets/image12.png)
+
+<br>
+<br>
+
+## Counting Semaphore
+<br>
+- There are the scenarios in which more than one processes need to execute in critical section simultaneously. However, counting semaphore can be used when we need to have more than one process in the critical section at the same time.
+
+<br><br>
+
+```
+struct Semaphore  
+{  
+    int value; // processes that can enter in the critical section simultaneously.   
+    queue type L; // L contains set of processes which get blocked   
+}  
+wait (Semaphore S)  
+{  
+    SS.value = S.value - 1; //semaphore's value will get decreased when a new   
+    //process enter in the critical section   
+    if (S.value< 0)  
+    {  
+        put_process(PCB) in L; //if the value is negative then   
+        //the process will get into the blocked state.  
+        Sleep();   
+    }  
+    else  
+        return;  
+}  
+signal (Semaphore s)  
+{  
+    SS.value = S.value+1; //semaphore value will get increased when   
+    //it makes an exit from the critical section.   
+    if(S.value<=0)  
+    {  
+        select a process from L; //if the value of semaphore is positive   
+        //then wake one of the processes in the blocked queue.   
+        wake-up();  
+    }  
+    }  
+ 
+```
+<br><br>
+
+- In this mechanism, the entry and exit in the critical section are performed on the basis of the value of counting semaphore. The value of counting semaphore at any point of time indicates the maximum number of processes that can enter in the critical section at the same time.
+
+<br><br>
+
+- A process which wants to enter in the critical section first decrease the semaphore value by 1 and then check whether it gets negative or not. If it gets negative then the process is pushed in the list of blocked processes (i.e. q) otherwise it gets enter in the critical section.
