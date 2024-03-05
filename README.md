@@ -264,7 +264,7 @@ scheduler temporarily via the system service GetResource.
 The real trouble arises at run-time, when a medium-priority task preempts a lower-priority task using a shared resource on which the higher-priority task is pending. If the higher-priority task is otherwise ready to run, but a medium-priority task is currently running instead, a priority inversion is said to occur.
 
 <br><br>
-![alt2](assrts/image4.png)
+![alt2](assets/image4.png)
 
 <br><br>
 
@@ -494,8 +494,10 @@ Both absolute time and relative time have their use cases:
 - The condition is that only one process can only enter the critical section. Remaining Processes which are interested to enter the critical section have to wait for the process to complete its work and then enter the critical section.
 
 - The portion of a piece of code that is performed by many threads is considered in critical section of a code. The critical section area is vulnerable to a race condition because various outputs from concurrently running threads potentially result in different orders of execution.
+<br><br>
 
 ![alt4](assets/image6.png)
+<br><br>
 
 # Any solution to the critical section problem must satisfy three requirements:
 
@@ -535,8 +537,10 @@ There are two general approaches to waiting in operating systems:
 Busy waiting, also known as spinning or busy looping, is a process synchronization technique in which a process/task waits and constantly checks for a condition to be satisfied before proceeding with its execution. In busy waiting, a process executes instructions that test for the entry condition to be true, such as the availability of a lock or resource in the computer system.
 
 For resource availability, consider a scenario where a process needs a resource for a specific program. However, the resource is currently in use and unavailable at the moment, therefore the process has to wait for resource availability before it can continue. This is what is known as busy waiting as illustrated below:
+<br><br>
 
 ![alt5](assets/image7.png)
+<br><br>
 
 ## Busy Waiting Techniques
 
@@ -576,8 +580,10 @@ For resource availability, consider a scenario where a process needs a resource 
 # T&S "Test and Set"
 
 - It uses a test and set instruction to provide synchronization among the processes executing concurrently.
+<br><br>
 
 ![alt6](assets/image8.png)
+<br><br>
 
 This synchronization mechanism works as explained in the following scenes:
 
