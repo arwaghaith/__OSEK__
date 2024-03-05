@@ -589,7 +589,7 @@ lock variable
 <br><br>
 
     - This method is hardware independent.
-    <br><br>
+<br><br>
 
     | Requirement      | Satisfied |
     | ---------------- | --------- |
@@ -597,7 +597,7 @@ lock variable
     | Progress         | ✔         |
     | Bounded Limit    | X         |
     
-    <br><br>
+<br><br>
 
 - In some operating systems, busy waiting can be inefficient because the looping procedure is a waste of computer resources. In addition, the system is left idle while waiting. This is particularly wasteful if the task/process at hand is of low priority. In that case, resources that can be diverted to complete high-priority tasks are hogged by a low-priority task in busy waiting.
 
