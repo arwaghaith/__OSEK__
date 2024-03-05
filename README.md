@@ -502,20 +502,23 @@ Both absolute time and relative time have their use cases:
 # Any solution to the critical section problem must satisfy three requirements:
 
  <span style="color:red">
-- **Mutual Exclusion**
+- Mutual Exclusion <br><br>
 </span>
    Exclusive access of each process to the shared memory. Only one process can be in its critical section at any given time.
+   <br><br>
 <span style="color:red">
-- **Progress**
+- Progress  <br><br>
 </span>
     If no process is in its critical section, and if one or more threads want to execute their critical section then any one of these threads must be allowed to get into its critical section.
+    <br><br>
  <span style="color:red">
-- **Bounded Waiting**
+- Bounded Waiting <br><br>
 </span>
 
    After a process makes a request for getting into its critical section, there is a limit for how many other processes can get into their critical section before this process's request is granted. So after the limit is reached, the system must grant the process permission to get into its critical section. The purpose of this condition is to make sure that every process gets the chance to actually enter its critical section so that no process starves forever.
+   <br><br>
 
-There are two general approaches to waiting in operating systems:
+# There are two general approaches to waiting in operating systems:
 
 - Firstly, a process/task can continuously check for the condition to be satisfied while consuming the processor – **busy waiting**.
 
